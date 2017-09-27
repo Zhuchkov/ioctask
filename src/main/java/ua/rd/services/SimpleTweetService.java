@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
-import ua.rd.config.TimelineConfigurer;
+import ua.rd.domain.TimelineFilter;
 import ua.rd.domain.Tweet;
 import ua.rd.domain.User;
 import ua.rd.repository.TweetRepository;
@@ -18,17 +18,17 @@ import ua.rd.repository.TweetRepository;
 public class SimpleTweetService implements TweetService {
 
 	private TweetRepository tweetRepository;
-	private BiPredicate<Tweet,User> timelineConfig;
+	private TimelineFilter timelineFilter;
 	
-	public SimpleTweetService(TweetRepository tweetRepository,BiPredicate<Tweet,User> timelineConfig) {
+	public SimpleTweetService(TweetRepository tweetRepository,TimelineFilter timelineFilter) {
 		this.tweetRepository=tweetRepository;
-		this.timelineConfig=timelineConfig;
+		this.timelineFilter=timelineFilter;
 	}
 	
 	//for tests
 	SimpleTweetService(TweetRepository tweetRepository){
 		this.tweetRepository=tweetRepository;
-		this.timelineConfig= new TimelineConfigurer().getDefaultConfig();
+		this.timelineFilter= new TimelineFilter();
 	}
 	
 	@Override
@@ -54,7 +54,7 @@ public class SimpleTweetService implements TweetService {
 	public Iterable<Tweet> userTimeline(User user) {
 		Collection<Tweet> tweets = tweetRepository.allTweets();
 		return tweets.stream()
-				.filter(tweet->timelineConfig.test(tweet,user) )
+				.filter(tweet->timelineFilter.test(tweet,user) )
 				.collect(Collectors.toList());
 	}
 

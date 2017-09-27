@@ -1,11 +1,14 @@
 package ua.rd.config;
 
+import java.util.List;
+import java.util.Set;
 import java.util.function.BiPredicate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import ua.rd.domain.TimelineFilter;
 import ua.rd.domain.Tweet;
 import ua.rd.domain.User;
 import ua.rd.repository.TweetRepository;
@@ -20,7 +23,7 @@ public class ServiceConfig {
 	
 	@Bean
 	@Autowired
-	public TweetService tweetService(TweetRepository tweetRepository,BiPredicate<Tweet,User> timelineConfig) {
+	public TweetService tweetService(TweetRepository tweetRepository,TimelineFilter timelineConfig) {
 		return new SimpleTweetService(tweetRepository,timelineConfig) {
 			
 			@Override
@@ -44,13 +47,9 @@ public class ServiceConfig {
 	
 	@Bean
 	@Autowired
-	public BiPredicate<Tweet,User> timelineConfig(TimelineConfigurer timelineConfigurer){
-		return timelineConfigurer.showOwnRetweet()
-				.or(timelineConfigurer.showOwnTweet())
-				.or(timelineConfigurer.showSubscriptionsRetweet())
-				.or(timelineConfigurer.showSubscriptionsTweet());
+	public TimelineFilter timelineConfig(Set<BiPredicate<Tweet,User>> timelineFilters){
+		
+		return new TimelineFilter(timelineFilters);
 	}
-	@Bean TimelineConfigurer timelineConfigurer() {
-		return new TimelineConfigurer();
-	}
+	
 }

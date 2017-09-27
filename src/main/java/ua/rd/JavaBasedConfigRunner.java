@@ -4,6 +4,8 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import ua.rd.config.RepoConfig;
 import ua.rd.config.ServiceConfig;
+import ua.rd.config.TimelineFilterConfig;
+import ua.rd.domain.TimelineFilter;
 import ua.rd.domain.Tweet;
 import ua.rd.domain.User;
 import ua.rd.services.TweetService;
@@ -13,16 +15,15 @@ public class JavaBasedConfigRunner {
 	public static void main(String[] args) {
 
 		AnnotationConfigApplicationContext repoContext = new AnnotationConfigApplicationContext(RepoConfig.class);
-
 		AnnotationConfigApplicationContext serviceContext = new AnnotationConfigApplicationContext();
 		serviceContext.setParent(repoContext);
-		serviceContext.register(ServiceConfig.class);
+		serviceContext.register(ServiceConfig.class,TimelineFilterConfig.class);
 		serviceContext.refresh();
-		
 		UserService userService = serviceContext.getBean(UserService.class);
 		TweetService tweetService = serviceContext.getBean(TweetService.class);
 		User currentUser = userService.saveUser(userService.createNewUser("user1"));
 		
+		TimelineFilter config =serviceContext.getBean(TimelineFilter.class); 
 		
 		tweetService.newTweet(currentUser);
 		tweetService.newTweet(currentUser);

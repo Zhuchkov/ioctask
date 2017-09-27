@@ -40,7 +40,7 @@ public class TweetServiceTest {
 	}
 
 	@Test
-	public void getUserTimelineTest() {
+	public void getUserTimelineDefaultTest() {
 		User user = new User("user");
 		List<Tweet> tweets = new ArrayList<>();
 		tweets.add(new Tweet("", user));
@@ -66,13 +66,13 @@ public class TweetServiceTest {
 		TweetRepository tweetRepository = mock(TweetRepository.class);
 		TweetService service = new SimpleTweetService(tweetRepository);
 		when(tweetRepository.allTweets()).thenReturn(tweets);
+		
 		Iterable<Tweet> result = service.userTimeline(user);
 		int itemCounter = 0;
 		for (Tweet t : result) {
-			System.out.println(t);
 			itemCounter++;
 		}
-		assertEquals(5, itemCounter);
+		assertEquals(0, itemCounter);
 	}
 
 	@Test
