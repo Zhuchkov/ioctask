@@ -17,6 +17,10 @@ public class Tweet {
 		setTxt(txt);
 		this.user = user;
 	}
+	public Tweet(Long tweetId, String txt, User user) {
+		this(txt,user);
+		this.tweetId = tweetId;
+	}
 
 	public Long getTweetId() {
 		return tweetId==null? null: new Long(tweetId);
