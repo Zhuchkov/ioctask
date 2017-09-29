@@ -9,6 +9,9 @@ public class TimelineFilter {
 	public TimelineFilter() {
 		 filter = defaultFilter();
 	}
+	public TimelineFilter(BiPredicate<Tweet,User> filter) {
+		 this.filter = filter;
+	}
 	public TimelineFilter(Set<BiPredicate<Tweet,User>> filters) {
 		this();
 		for(BiPredicate<Tweet,User> filter : filters) {
