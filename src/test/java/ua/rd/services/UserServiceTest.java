@@ -116,7 +116,7 @@ public class UserServiceTest {
 		User retweetTarget = new User("retweetTarget");
 		Long TweetId = 0L;
 		Tweet tweet =  new Tweet("", retweetTarget);
-		tweet.setTweetId(TweetId);
+		tweet.setId(TweetId);
 		tweets.add(tweet);
 		
 		TweetRepository tweetRepository = mock(TweetRepository.class);

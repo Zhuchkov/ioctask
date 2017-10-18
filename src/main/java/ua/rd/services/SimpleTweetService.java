@@ -38,9 +38,10 @@ public class SimpleTweetService implements TweetService {
 	}
 
 	@Override
-	public Tweet newTweet(User user) {
+	public Tweet newTweet(User user, String text) {
 		Tweet tweet = createNewTweet();
 		tweet.setUser(user);
+		tweet.setTxt(text);
 		return tweetRepository.save(tweet);
 		 
 	}
@@ -66,6 +67,18 @@ public class SimpleTweetService implements TweetService {
 			tweetRepository.save(item);
 			return true;
 		}).orElse(false);
+	}
+
+	@Override
+	public Iterable<Tweet> allTweets() {
+		// TODO Auto-generated method stub
+		return tweetRepository.allTweets();
+	}
+
+	@Override
+	public Tweet saveTweet(Tweet tweet) {
+		// TODO Auto-generated method stub
+		return tweetRepository.save(tweet);
 	}
 
 }

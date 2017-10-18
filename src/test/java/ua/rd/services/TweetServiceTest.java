@@ -53,7 +53,7 @@ public class TweetServiceTest {
 		
 		User yetAnotherUser = new User("yetAnotherUser");
 		Tweet tweet =new Tweet("", yetAnotherUser);
-		tweet.setTweetId(4L);
+		tweet.setId(4L);
 		tweets.add(tweet);
 		
 		otherUser.setRetweet(tweet);
@@ -99,7 +99,7 @@ public class TweetServiceTest {
 		TweetRepository tweetRepository = mock(TweetRepository.class);
 		when(tweetRepository.save(any(Tweet.class))).then(returnsFirstArg());
 		TweetService service = new SimpleTweetService(tweetRepository);
-		Tweet tweet = service.newTweet(user);
+		Tweet tweet = service.newTweet(user,"");
 		assertEquals(user, tweet.getUser());
 	}
 	
@@ -112,7 +112,7 @@ public class TweetServiceTest {
 		User retweetTarget = new User("retweetTarget");
 		Long TweetId = 0L;
 		Tweet tweet =  new Tweet("", retweetTarget);
-		tweet.setTweetId(TweetId);
+		tweet.setId(TweetId);
 		tweets.add(tweet);
 		
 		TweetRepository tweetRepository = mock(TweetRepository.class);
@@ -133,7 +133,7 @@ public class TweetServiceTest {
 		User retweetTarget = new User("retweetTarget");
 		Long TweetId = 0L;
 		Tweet tweet =  new Tweet("", retweetTarget);
-		tweet.setTweetId(TweetId);
+		tweet.setId(TweetId);
 		tweets.add(tweet);
 		
 		TweetRepository tweetRepository = mock(TweetRepository.class);
@@ -157,7 +157,7 @@ public class TweetServiceTest {
 		
 		Long TweetId = 0L;
 		Tweet tweet =  new Tweet("", retweetTarget);
-		tweet.setTweetId(TweetId);
+		tweet.setId(TweetId);
 		tweets.add(tweet);
 		
 		TweetRepository tweetRepository = mock(TweetRepository.class);

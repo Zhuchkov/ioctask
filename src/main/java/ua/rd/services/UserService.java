@@ -8,6 +8,7 @@ public interface UserService {
 	User createNewUser(String name);
 	User saveUser(User user);
 	Optional<User> getUser(Long id);
+	Optional<User> getUserByName(String name);
 	boolean createSubscription(User subscriber, Long targetId);
 	boolean retweet(User retweeter, Long tweetId);
 }

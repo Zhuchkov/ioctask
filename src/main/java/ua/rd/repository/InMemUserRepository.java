@@ -35,8 +35,8 @@ public class InMemUserRepository implements UserRepository {
 	}
 
 	@Override
-	public List<User> getUsersByName(String username) {
-		return userRepo.values().stream().filter(user->user.getName().equals(username)).collect(Collectors.toList());
+	public Optional<User> getUserByName(String username) {
+		return userRepo.values().stream().filter(user->user.getName().equals(username)).findAny();
 	}
 
 	

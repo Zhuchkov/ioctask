@@ -5,6 +5,8 @@ import ua.rd.domain.Tweet;
 import ua.rd.domain.User;
 
 import javax.annotation.PostConstruct;
+
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -21,6 +23,16 @@ public class InMemTweetRepository implements TweetRepository {
 	public InMemTweetRepository(Map<Long, Tweet> tweets) {
 		this.tweets = tweets;
 	}
+	
+	@PostConstruct
+	private void init() {
+		User user = new User("aaa");
+		put(new Tweet("", user));
+		put(new Tweet("", user));
+		put(new Tweet("", user));
+		User otherUser = new User("bbb");
+		put(new Tweet("", otherUser));
+	}
 
 	@Override
 	public Collection<Tweet> allTweets() {
@@ -35,14 +47,14 @@ public class InMemTweetRepository implements TweetRepository {
 	
 	@Override
 	public Tweet save(Tweet tweet) {
-		if (tweet.getTweetId() == null) {
-			tweet.setTweetId(idCounter++);
+		if (tweet.getId() == null) {
+			tweet.setId(idCounter++);
 		}
 		put(tweet);
 		return tweet;
 	}
 
 	private Tweet put(Tweet tweet) {
-		return tweets.put(tweet.getTweetId(), tweet);
+		return tweets.put(tweet.getId(), tweet);
 	}
 }

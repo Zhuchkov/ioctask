@@ -10,6 +10,6 @@ public interface UserRepository {
 	User save(User user);
 	User update(User user);
 	Optional<User> get(Long userId);
-	List<User> getUsersByName(String username);
+	Optional<User> getUserByName(String username);
 
 }

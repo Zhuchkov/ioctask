@@ -17,6 +17,9 @@ public class User {
 	public User() {
 
 	}
+	public User(long id) {
+		this.id=id;
+	}
 
 	public User(String name) {
 		this.name = name;
@@ -85,7 +88,7 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User{ name='" + name + '}';
+		return "User{ name=" + name + '}';
 	}
 
 	public Set<Tweet> getRetweets() {

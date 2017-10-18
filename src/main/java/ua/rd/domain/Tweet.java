@@ -2,7 +2,7 @@ package ua.rd.domain;
 
 public class Tweet {
 
-	private Long tweetId;
+	private Long id;
 	private String txt;
 	private User user;
 	private long likeCounter;
@@ -19,15 +19,15 @@ public class Tweet {
 	}
 	public Tweet(Long tweetId, String txt, User user) {
 		this(txt,user);
-		this.tweetId = tweetId;
+		this.id = tweetId;
 	}
 
-	public Long getTweetId() {
-		return tweetId==null? null: new Long(tweetId);
+	public Long getId() {
+		return id==null? null: new Long(id);
 	}
 
-	public void setTweetId(Long tweetId) {
-		this.tweetId = new Long(tweetId);
+	public void setId(Long tweetId) {
+		this.id = new Long(tweetId);
 	}
 
 	public String getTxt() {
@@ -85,7 +85,7 @@ public class Tweet {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((tweetId == null) ? 0 : tweetId.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
 
@@ -98,17 +98,17 @@ public class Tweet {
 		if (getClass() != obj.getClass())
 			return false;
 		Tweet other = (Tweet) obj;
-		if (tweetId == null) {
-			if (other.tweetId != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!tweetId.equals(other.tweetId))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
-		return "Tweet{" + "tweetId=" + tweetId + 
+		return "Tweet{" + "tweetId=" + id + 
 				", txt='" + txt + '\'' + 
 				", author=" + user.getName() + 
 				", likes=" + likeCounter + 

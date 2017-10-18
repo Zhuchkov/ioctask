@@ -31,6 +31,10 @@ public class SimpleUserService implements UserService {
 		return userRepository.get(id);
 
 	}
+	@Override
+	public Optional<User> getUserByName(String name) {
+		return userRepository.getUserByName(name);
+	}
 
 	@Override
 	public User createNewUser(String name) {
@@ -60,4 +64,6 @@ public class SimpleUserService implements UserService {
 			return changed;
 		}).orElse(false);
 	}
+
+	
 }
